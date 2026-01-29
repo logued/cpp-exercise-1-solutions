@@ -1,9 +1,9 @@
-// Exercise 1 - SOLUTIONS           February 2022
+// Exercise 1 - SOLUTIONS       updated: Jan 2026
 
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include<float.h>
+#include <cfloat>
 #include <map>
 
 using namespace std;
@@ -101,14 +101,14 @@ void question5() {
 void question6() {
     char c = CHAR_MAX; // -128 to +127  (is 256 different characters) max is  0x7f (binary 0111_1111)
     int i = INT_MAX;    // 4-byte, (binary: leading 0, followed by 31 ones)
-    double d = DBL_MAX; // defined in "float.h"
-    cout << (int) c << endl; // cast to int; output the char c as an integer value
+    double d = DBL_MAX; // defined in <cfloat>
+    cout << static_cast<int>(c) << endl; // cast to int; output the char c as an integer value
     cout << c << endl;  // output the ASCII character corresponding to the max (11111111) or 0xFF
     cout << i << endl;
     cout << d << endl;
 
     unsigned char uc = UCHAR_MAX; // 0-255;  (binary 1111_1111);
-    cout << (int) uc << endl;
+    cout << static_cast<int>(uc) << endl;
 
 }
 
@@ -116,9 +116,9 @@ void question7() {
     char c = CHAR_MAX;
     int i = INT_MAX;
     double d = DBL_MAX;
-    cout << "char   sizeof(c) = " << sizeof(c) << endl;
-    cout << "int    sizeof(i) = " << sizeof(i) << endl;
-    cout << "double sizeof(d) = " << sizeof(d) << endl;
+    cout << "char   sizeof(c) = " << sizeof(c) << " bytes" << endl;
+    cout << "int    sizeof(i) = " << sizeof(i) << " bytes" << endl;
+    cout << "double sizeof(d) = " << sizeof(d) << " bytes" << endl;
 }
 
 void question8() {
@@ -200,7 +200,7 @@ void question11() {
     }
     string top(longestLength + 4, '*');
     cout << top << endl;
-    for (string s: msgs) {
+    for (const string& s: msgs) {
         string padd(longestLength - s.size(), ' ');
         cout << "* " << s << padd << " *" << endl;
     }
@@ -221,8 +221,8 @@ void question12() {
     string top(longestLength + 4, '*');
     cout << top << endl;
     for (string s: msgs) {
-        string padd(longestLength - s.size(), ' ');
-        cout << "* " << s << padd << " *" << endl;
+        string padding(longestLength - s.size(), ' ');  // create string object and initialize
+        cout << "* " << s << padding << " *" << endl;
     }
     cout << top << endl;
     cout << "\n\n";
@@ -246,6 +246,8 @@ void question12() {
     cout << top << endl;
 }
 
+//////////////////////////////////////////////////////////////////////////
+// Don't worry about understanding what is below this line.
 
 typedef void(*questionPtr)(void);
 
